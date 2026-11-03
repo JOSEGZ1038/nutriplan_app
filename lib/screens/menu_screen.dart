@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/app_drawer.dart';
+
 /// Pantalla del menú semanal.
 /// Más adelante mostrará los 7 días con desayuno, almuerzo y cena.
 class MenuScreen extends StatelessWidget {
@@ -9,6 +11,7 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Menú semanal')),
+      drawer: const AppDrawer(),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

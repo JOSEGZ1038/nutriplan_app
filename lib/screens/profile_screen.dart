@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/app_drawer.dart';
+
 /// Pantalla de perfil del usuario.
 /// Por ahora solo muestra un texto; en el paso 5 aquí irá el formulario
 /// (edad, peso, estatura, sexo y nivel de actividad).
@@ -11,6 +13,7 @@ class ProfileScreen extends StatelessWidget {
     // Scaffold da la estructura básica de una pantalla: AppBar arriba y body.
     return Scaffold(
       appBar: AppBar(title: const Text('Mi perfil')),
+      drawer: const AppDrawer(),
       body: const Center(
         // Column apila el ícono y el texto uno debajo del otro.
         child: Column(

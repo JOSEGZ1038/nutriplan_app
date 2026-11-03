@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/app_drawer.dart';
+
 /// Pantalla de la lista de mercado.
 /// Más adelante mostrará los ingredientes del menú agrupados y sumados.
 class ShoppingListScreen extends StatelessWidget {
@@ -9,6 +11,7 @@ class ShoppingListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Lista de mercado')),
+      drawer: const AppDrawer(),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
