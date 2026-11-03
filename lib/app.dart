@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'screens/home_screen.dart';
+import 'router/app_router.dart';
 
 class NutriPlanApp extends StatelessWidget {
   const NutriPlanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // MaterialApp.router delega la navegación a GoRouter.
+    return MaterialApp.router(
       title: 'NutriPlan',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorSchemeSeed: Colors.green, useMaterial3: true),
-      // Temporal: en el paso 3 lo cambiaremos por MaterialApp.router con GoRouter.
-      home: const HomeScreen(),
+      routerConfig: appRouter,
     );
   }
 }
