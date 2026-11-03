@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tuapellido.nutriplan_app"
+    namespace = "com.josegz1038.nutriplan_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.tuapellido.nutriplan_app"
+        applicationId = "com.josegz1038.nutriplan_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

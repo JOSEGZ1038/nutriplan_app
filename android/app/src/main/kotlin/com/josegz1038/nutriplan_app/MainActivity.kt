@@ -1,4 +1,4 @@
-package com.tuapellido.nutriplan_app
+package com.josegz1038.nutriplan_app
 
 import io.flutter.embedding.android.FlutterActivity
 

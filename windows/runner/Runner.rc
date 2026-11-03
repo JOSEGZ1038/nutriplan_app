@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.tuapellido" "\0"
+            VALUE "CompanyName", "com.josegz1038" "\0"
             VALUE "FileDescription", "nutriplan_app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "nutriplan_app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.tuapellido. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.josegz1038. All rights reserved." "\0"
             VALUE "OriginalFilename", "nutriplan_app.exe" "\0"
             VALUE "ProductName", "nutriplan_app" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
