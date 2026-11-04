@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/perfil.dart';
+import '../services/api_service.dart';
 import '../widgets/app_drawer.dart';
 
 /// Muestra el resultado del cálculo.
@@ -41,7 +42,7 @@ class ResultScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Tarjeta con el gasto en reposo.
+          // Tarjeta con el gasto en reposo (cálculo LOCAL, hecho en la app).
           _tarjeta(
             context,
             icono: Icons.bedtime,
@@ -50,7 +51,7 @@ class ResultScreen extends StatelessWidget {
             detalle: 'Lo que tu cuerpo gasta sin hacer actividad.',
           ),
           const SizedBox(height: 12),
-          // Tarjeta con el gasto total.
+          // Tarjeta con el gasto total (cálculo LOCAL).
           _tarjeta(
             context,
             icono: Icons.local_fire_department,
@@ -58,6 +59,10 @@ class ResultScreen extends StatelessWidget {
             valor: '${p.gastoTotal} kcal/día',
             detalle: 'GER × factor de actividad (${p.factorActividad}).',
           ),
+          const SizedBox(height: 24),
+
+          // NUEVO (paso 7B): cálculo hecho por la API .NET que corre en Docker.
+          _TarjetaServidor(perfil: p),
           const SizedBox(height: 24),
 
           // Resumen de los datos recibidos (demuestra que el extra llegó bien).
@@ -112,6 +117,98 @@ class ResultScreen extends StatelessWidget {
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
+    );
+  }
+}
+
+/// NUEVO (paso 7B): tarjeta que consulta la API en Docker y compara
+/// su resultado con el cálculo local de la app.
+/// Es StatefulWidget para crear la petición UNA sola vez (en initState)
+/// y no repetirla cada vez que la pantalla se redibuja.
+class _TarjetaServidor extends StatefulWidget {
+  final Perfil perfil;
+
+  const _TarjetaServidor({required this.perfil});
+
+  @override
+  State<_TarjetaServidor> createState() => _TarjetaServidorState();
+}
+
+class _TarjetaServidorState extends State<_TarjetaServidor> {
+  late Future<ResultadoServidor> _peticion;
+
+  @override
+  void initState() {
+    super.initState();
+    _peticion = ApiService.calcularEnergia(widget.perfil);
+  }
+
+  /// Vuelve a intentar la petición (por ejemplo, después de encender Docker).
+  void _reintentar() {
+    setState(() {
+      _peticion = ApiService.calcularEnergia(widget.perfil);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // FutureBuilder redibuja la tarjeta según el estado de la petición.
+    return FutureBuilder<ResultadoServidor>(
+      future: _peticion,
+      builder: (context, snapshot) {
+        // 1) Esperando la respuesta del servidor.
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Card(
+            child: ListTile(
+              leading: CircularProgressIndicator(),
+              title: Text('Consultando el servidor…'),
+              subtitle: Text('API .NET en Docker'),
+            ),
+          );
+        }
+
+        // 2) Error: sin conexión, tiempo agotado o datos rechazados.
+        if (snapshot.hasError) {
+          final mensaje = snapshot.error.toString().replaceFirst(
+            'Exception: ',
+            '',
+          );
+          return Card(
+            child: ListTile(
+              leading: const Icon(Icons.cloud_off, size: 40, color: Colors.red),
+              title: const Text('Servidor no disponible'),
+              subtitle: Text(mensaje),
+              trailing: IconButton(
+                icon: const Icon(Icons.refresh),
+                tooltip: 'Reintentar',
+                onPressed: _reintentar,
+              ),
+            ),
+          );
+        }
+
+        // 3) Datos recibidos: los comparamos con el cálculo local.
+        final servidor = snapshot.data!;
+        final coincide =
+            servidor.gastoReposo == widget.perfil.gastoReposo &&
+            servidor.gastoTotal == widget.perfil.gastoTotal;
+
+        return Card(
+          child: ListTile(
+            leading: Icon(
+              coincide ? Icons.cloud_done : Icons.warning,
+              size: 40,
+              color: coincide ? Colors.green : Colors.orange,
+            ),
+            title: const Text('Cálculo del servidor (Docker)'),
+            subtitle: Text(
+              'GER ${servidor.gastoReposo} · GET ${servidor.gastoTotal} kcal/día\n'
+              '${coincide ? '✔ Coincide con el cálculo de la app' : '⚠ No coincide con la app'}',
+            ),
+            isThreeLine: true,
+          ),
+        );
+      },
     );
   }
 }

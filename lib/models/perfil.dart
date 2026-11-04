@@ -41,4 +41,13 @@ class Perfil {
 
   /// Gasto energético total (GET) = GER × factor de actividad.
   int get gastoTotal => (_gerExacto * factorActividad).round();
+
+  /// Convierte el perfil a un Map con los nombres que espera la API (.NET).
+  Map<String, dynamic> toJson() => {
+    'edad': edad,
+    'pesoKg': pesoKg,
+    'estaturaCm': estaturaCm,
+    'sexo': sexo,
+    'actividad': actividad,
+  };
 }
