@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:go_router/go_router.dart';
+
+import '../models/perfil.dart';
 import '../widgets/app_drawer.dart';
 
 /// Pantalla de perfil con un formulario validado.
@@ -66,22 +69,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return; // hay errores: no seguimos
     }
 
-    final edad = int.parse(_edadController.text);
-    final peso = double.parse(_pesoController.text.replaceAll(',', '.'));
-    final estatura = double.parse(
-      _estaturaController.text.replaceAll(',', '.'),
+    // Creamos el objeto Perfil con los datos ya validados.
+    final perfil = Perfil(
+      edad: int.parse(_edadController.text),
+      pesoKg: double.parse(_pesoController.text.replaceAll(',', '.')),
+      estaturaCm: double.parse(_estaturaController.text.replaceAll(',', '.')),
+      sexo: _sexo!,
+      actividad: _actividad!,
     );
 
-    // Por ahora solo mostramos los datos. En el paso 6 los enviaremos
-    // a una pantalla de resultado con GoRouter.
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Datos válidos: $edad años, $peso kg, $estatura cm, '
-          '$_sexo, $_actividad',
-        ),
-      ),
-    );
+    // push (no go) para que el usuario pueda volver al formulario con ←
+    // y encuentre sus datos todavía escritos.
+    context.push('/resultado', extra: perfil);
   }
 
   @override

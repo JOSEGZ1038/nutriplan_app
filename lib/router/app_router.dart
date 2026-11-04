@@ -5,6 +5,8 @@ import '../screens/home_screen.dart';
 import '../screens/menu_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/shopping_list_screen.dart';
+import '../models/perfil.dart';
+import '../screens/result_screen.dart';
 
 /// Configuración central de la navegación con GoRouter.
 /// Cada GoRoute relaciona una ruta (path) con la pantalla que se muestra.
@@ -30,6 +32,13 @@ final GoRouter appRouter = GoRouter(
       path: '/mercado',
       name: 'mercado',
       builder: (context, state) => const ShoppingListScreen(),
+    ),
+    GoRoute(
+      path: '/resultado',
+      name: 'resultado',
+      // state.extra trae el objeto que envió el formulario.
+      // "as Perfil?" lo convierte al tipo Perfil (o null si no llegó nada).
+      builder: (context, state) => ResultScreen(perfil: state.extra as Perfil?),
     ),
   ],
   // Pantalla que se muestra si se navega a una ruta que no existe.
