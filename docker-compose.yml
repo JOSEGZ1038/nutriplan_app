@@ -1,0 +1,8 @@
+# Levanta el backend de NutriPlan con un solo comando: docker compose up
+services:
+  api:
+    build: ./backend/NutriPlan.Api   # carpeta donde está el Dockerfile
+    container_name: nutriplan-api
+    ports:
+      - "8080:8080"                  # puerto de tu PC : puerto del contenedor
+    restart: unless-stopped
