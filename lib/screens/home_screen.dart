@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import '../widgets/app_drawer.dart';
 
+/// Pantalla de inicio.
+/// Aplicado del video FLUTTER_03: cada botón muestra una forma distinta
+/// de navegar con GoRouter (go, push, pushNamed y una ruta inexistente).
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -26,7 +29,6 @@ class HomeScreen extends StatelessWidget {
               icon: const Icon(Icons.person),
               label: const Text('Mi perfil (push)'),
             ),
-            const SizedBox(height: 12),
             const SizedBox(height: 12),
 
             // go: REEMPLAZA la ruta actual → no hay flecha atrás.

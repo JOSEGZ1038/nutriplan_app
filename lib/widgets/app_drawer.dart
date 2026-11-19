@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 
 /// Menú lateral reutilizable: se coloca en el Scaffold de cada pantalla.
 /// Navega con GoRouter usando context.go (reemplaza la ruta actual).
+///
+/// Aplicado del video FLUTTER_04 (navegación con Drawer): un solo widget
+/// en la carpeta widgets/ que se reutiliza en todas las pantallas.
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 

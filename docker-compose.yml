@@ -1,4 +1,5 @@
-# Levanta el backend de NutriPlan con un solo comando: docker compose up
+# Aplicado del video BONUS (automatización de contenedores Docker):
+# levanta el backend de NutriPlan con un solo comando: docker compose up
 services:
   api:
     build: ./backend/NutriPlan.Api   # carpeta donde está el Dockerfile

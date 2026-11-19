@@ -1,3 +1,6 @@
+# Aplicado del video BONUS (automatización de contenedores Docker):
+# imagen en dos etapas para que la imagen final sea pequeña.
+
 # Etapa 1: compilar con el SDK de .NET 10 (imagen grande, solo se usa para compilar).
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src

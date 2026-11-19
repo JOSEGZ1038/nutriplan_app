@@ -10,6 +10,11 @@ import '../screens/result_screen.dart';
 
 /// Configuración central de la navegación con GoRouter.
 /// Cada GoRoute relaciona una ruta (path) con la pantalla que se muestra.
+///
+/// Aplicado del video FLUTTER_03 (estructura y navegación):
+/// en vez de Navigator.push con MaterialPageRoute, toda la navegación
+/// se define en un solo lugar con GoRouter, usando rutas como en una web.
+/// La ruta /resultado aplica el video FLUTTER_05: recibe datos con state.extra.
 final GoRouter appRouter = GoRouter(
   initialLocation: '/', // ruta con la que arranca la app
   routes: [

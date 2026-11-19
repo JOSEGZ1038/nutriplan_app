@@ -61,7 +61,8 @@ class ResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // NUEVO (paso 7B): cálculo hecho por la API .NET que corre en Docker.
+          // Aplicado del video FLUTTER_01: cálculo hecho por la API .NET
+          // que corre en Docker, comparado con el cálculo local.
           _TarjetaServidor(perfil: p),
           const SizedBox(height: 24),
 
@@ -82,7 +83,7 @@ class ResultScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // pop: vuelve al formulario, que conserva los datos escritos.
+          //vuelve al formulario, que conserva los datos escritos.
           OutlinedButton.icon(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.edit),

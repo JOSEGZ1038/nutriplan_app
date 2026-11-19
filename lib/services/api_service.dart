@@ -34,6 +34,10 @@ class ResultadoServidor {
 }
 
 /// Toda la comunicación con el backend está en esta clase.
+///
+/// Aplicado del video FLUTTER_01 (conectividad con Docker): la app llama
+/// por HTTP a la API que corre en un contenedor; desde el emulador Android
+/// la PC se ve como 10.0.2.2.
 class ApiService {
   /// Dirección del backend según dónde corre la app:
   /// - Emulador Android: 10.0.2.2 es "la PC" vista desde el emulador.

@@ -1,6 +1,8 @@
 // API mínima de NutriPlan.
 // Expone el mismo cálculo que la app (Mifflin-St Jeor) para demostrar
 // la comunicación entre Flutter y un backend que corre en Docker.
+// Aplicado del video FLUTTER_01 (lado del servidor): es la API que la app
+// consume desde el emulador.
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();

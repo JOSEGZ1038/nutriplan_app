@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'router/app_router.dart';
 
+/// Widget raíz de la app.
+/// Aplicado del video FLUTTER_03: se usa MaterialApp.router en lugar de
+/// MaterialApp con "home", para que GoRouter (router/app_router.dart)
+/// controle toda la navegación.
 class NutriPlanApp extends StatelessWidget {
   const NutriPlanApp({super.key});
 

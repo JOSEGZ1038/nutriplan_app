@@ -8,6 +8,10 @@ import '../widgets/app_drawer.dart';
 
 /// Pantalla de perfil con un formulario validado.
 /// Es StatefulWidget porque guarda lo que el usuario va eligiendo (sexo, actividad).
+///
+/// Aplicado del video FLUTTER_05 (navegación y formularios básicos):
+/// Form + GlobalKey para validar todos los campos a la vez, y envío de los
+/// datos a la pantalla de resultado con context.push('/resultado', extra: ...).
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
